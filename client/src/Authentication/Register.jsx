@@ -47,9 +47,7 @@ function Register(props) {
   }
 
 
-  return state ? (
-    <Redirect to="/" />
-  ) : (
+  return  (
     <Fragment>
       <Container>
         <Row>

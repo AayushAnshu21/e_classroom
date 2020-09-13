@@ -1,7 +1,8 @@
 import React, { Fragment,useContext,useReducer, createContext,useEffect} from "react";
-import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, useHistory,Switch } from "react-router-dom";
 import Login from "./Authentication/Login";
 import Register from "./Authentication/Register";
+import Tpost from "./posts/Tpost";
 import { initialState, reducer } from "./reducer/reducer";
 import HNavbar from "./Partials/Navbar";
 import "./App.css";
@@ -19,10 +20,13 @@ const Routing = () => {
   },[dispatch]);
 
   return (
-    <section>
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/login" component={Login} />      
-    </section>
+    <Switch>
+      <Route exact path="/" component={() => <h1>HomePage</h1>} />
+      {!state && <Route exact path="/register" component={Register} />}
+      {!state && <Route exact path="/login" component={Login} />}
+      {state && <Route exact path="/tpost" component={Tpost} />}
+      <Route component={() => <h1>Does not exist</h1>} />
+    </Switch>
   );
 };
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../middlewares/auth");
 var multer = require("multer");
 var path = require("path");
+let fs = require("fs-extra");
 const checkType = require("../middlewares/checkType");
 
 let lectures = [];
@@ -11,6 +12,7 @@ let notes = [];
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     var reqPath = path.join(__dirname, `../uploads/${file.fieldname}`);
+    fs.mkdirsSync(reqPath);
     cb(null, reqPath);
   },
   filename: function (req, file, cb) {
@@ -58,7 +60,7 @@ const Profile = require("../models/Teacher_Profile");
 const Tpost = require("../models/Teacher_Post");
 
 //Create  Post
-router.post("/", auth, checkType.checkTeacher, cpUpload, async (req, res) => {
+router.post("/", auth, checkType.checkTeacher , cpUpload, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     const newTPost = new Tpost({

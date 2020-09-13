@@ -9,7 +9,7 @@ import "../App.css";
 function Login(props) {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
- 
+  
 
   // if (state != null) {
   //   history.push("/");
@@ -48,9 +48,7 @@ function Login(props) {
   };
 
 
-  return state ? (
-    <Redirect to="/" />
-  ) : (
+  return  (
     <Fragment>
       <Container>
         <Row>
